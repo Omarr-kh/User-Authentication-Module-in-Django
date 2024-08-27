@@ -7,10 +7,20 @@ from django.contrib import messages
 
 @login_required(login_url="login")
 def home_view(request):
+    """
+    View to render the home page.
+    Only accessible to authenticated users.
+    """
     return render(request, "home.html")
 
 
 def register_view(request):
+    """
+    View to handle user registration.
+
+    Process form data and register a user into the database
+    Displays a success message if the account is created successfully
+    """
     form = RegisterForm()
     context = {"form": form}
 
@@ -26,13 +36,18 @@ def register_view(request):
 
 
 def login_view(request):
+    """
+    View to handle user login.
+
+    Processes form data and logs in a user if authenticated.
+    If authentication fails, an error message is displayed.
+    """
     form = LoginForm()
     context = {"form": form}
 
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            # form.save()
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)
@@ -41,10 +56,16 @@ def login_view(request):
                 return redirect("home")
             else:
                 messages.info(request, "Username or Password is incorrect")
+
     return render(request, "login.html", context)
 
 
 @login_required(login_url="login")
 def logout_view(request):
+    """
+    View to handle user logout.
+
+    Logs out the current user and redirects them to the login page.
+    """
     logout(request)
     return redirect("login")
