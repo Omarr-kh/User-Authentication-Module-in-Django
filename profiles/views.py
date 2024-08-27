@@ -6,11 +6,11 @@ from django.contrib import messages
 
 
 @login_required(login_url="login")
-def home_page(request):
+def home_view(request):
     return render(request, "home.html")
 
 
-def register_page(request):
+def register_view(request):
     form = RegisterForm()
     context = {"form": form}
 
@@ -25,7 +25,7 @@ def register_page(request):
     return render(request, "register.html", context)
 
 
-def login_page(request):
+def login_view(request):
     form = LoginForm()
     context = {"form": form}
 
@@ -45,6 +45,6 @@ def login_page(request):
 
 
 @login_required(login_url="login")
-def logout_page(request):
+def logout_view(request):
     logout(request)
     return redirect("login")
