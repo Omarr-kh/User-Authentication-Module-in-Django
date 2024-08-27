@@ -48,6 +48,7 @@
 
             form input[type="submit"] {
                 padding: 10px 15px;
+                margin-top: 20px;
                 background-color: #007bff;
                 color: white;
                 border: none;
@@ -89,6 +90,8 @@
                 <div class="form-group">
                     {{ form.as_p }}
                 </div>
+
+                <a href="{% url 'reset_password' %}">Forgot Password?</a>
 
                 <input type="submit" value="Login">
                 {% for message in messages %}
