@@ -44,6 +44,7 @@ def login_page(request):
     return render(request, "login.html", context)
 
 
+@login_required(login_url="login")
 def logout_page(request):
     logout(request)
     return redirect("login")
